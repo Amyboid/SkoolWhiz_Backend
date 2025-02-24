@@ -86,14 +86,34 @@ The following endpoints are available:
 - The `Response Status` shows possible HTTP status codes that could be returned.
 - The `Example Response` column provides sample responses returned from the API for each endpoint.
 
-### 6. Swagger Documentation 📑
+### Swagger Documentation 📑
 
-The API is integrated with **Swagger** for interactive documentation and testing. You can access the Swagger UI by navigating to:
+The API is integrated with **Swagger** for interactive documentation and testing. You can easily access the Swagger UI by navigating to:
 
-- **URL:** `/apidocs` (Make sure your Flask app is running)
+- **URL:** `/apidocs` (Ensure your Flask app is running)
 
-Once the Flask app is running, open your browser and go to [http://localhost:5000/apidocs](http://localhost:5000/apidocs). This will display the **Swagger UI**, where you can:
+Once the Flask app is running, open your browser and go to:
+
+- [http://localhost:5000/apidocs](http://localhost:5000/apidocs)
+
+This will display the **Swagger UI**, where you can:
 
 - **View the full API documentation**
 - **Test each endpoint interactively** by entering input data and hitting "Execute"
 - **See real-time responses** with status codes, response data, and more 🖥️
+
+
+## Project Structure
+
+The project is organized as follows:
+
+📂 **root/**  
+├── 📂 **src/**  
+|   ├── 📂 **routes/**  
+|   |   ├── `routes.py`    # API routes & CRUD controllers  
+|   ├── `database.py`      # DB initialization & connection  
+├── 📂 **utils/**  
+|   ├── `db_schema.py`    # Database schema  
+├── `app.py`               # Main application entry point  
+├── `requirements.txt`     # Dependencies list  
+└── `README.md`            # Project documentation
