@@ -35,25 +35,25 @@ def index():
 @swag_from({
     'parameters': [
         {
-            'name': 'title',
+            'name': 'task',
             'in': 'body',
-            'type': 'string',
             'required': True,
-            'description': 'The title of the task'
-        },
-        {
-            'name': 'description',
-            'in': 'body',
-            'type': 'string',
-            'required': True,
-            'description': 'The description of the task'
-        },
-        {
-            'name': 'completed',
-            'in': 'body',
-            'type': 'boolean',
-            'required': True,
-            'description': 'Task completion status'
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'title': {
+                        'type': 'string',
+                        'description': 'The title of the task',
+                        'example': 'Task 1'
+                    },
+                    'description': {
+                        'type': 'string',
+                        'description': 'The description of the task',
+                        'example': 'First task'
+                    }
+                },
+                'required': ['title', 'description']
+            }
         }
     ],
     'responses': {
@@ -154,25 +154,29 @@ def delete_task(task_id):
             'description': 'ID of the task to update'
         },
         {
-            'name': 'title',
+            'name': 'task',
             'in': 'body',
-            'type': 'string',
             'required': False,
-            'description': 'Updated title of the task'
-        },
-        {
-            'name': 'description',
-            'in': 'body',
-            'type': 'string',
-            'required': False,
-            'description': 'Updated description of the task'
-        },
-        {
-            'name': 'completed',
-            'in': 'body',
-            'type': 'boolean',
-            'required': False,
-            'description': 'Updated completion status of the task'
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'title': {
+                        'type': 'string',
+                        'description': 'Updated title of the task',
+                        'example': 'Updated Task Title'
+                    },
+                    'description': {
+                        'type': 'string',
+                        'description': 'Updated description of the task',
+                        'example': 'Updated task description'
+                    },
+                    'completed': {
+                        'type': 'boolean',
+                        'description': 'Updated completion status of the task',
+                        'example': True
+                    }
+                }
+            }
         }
     ],
     'responses': {
@@ -183,9 +187,9 @@ def delete_task(task_id):
             }
         },
         '400': {
-            'description': 'Bad request (no fields to update)',
+            'description': 'Bad request (no fields to update or task_id included)',
             'examples': {
-                'application/json': {'error': 'No fields to update'}
+                'application/json': {'error': 'No fields to update or task_id cannot be updated'}
             }
         },
         '404': {
@@ -196,8 +200,14 @@ def delete_task(task_id):
         }
     }
 })
+
 def update_task(task_id):
     data = request.get_json()
+
+    # Check if task_id is in the request body
+    if 'task_id' in data:
+        return jsonify({"error": "task_id cannot be updated"}), 400
+
     title = data.get('title')
     description = data.get('description')
     completed = data.get('completed')
