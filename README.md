@@ -5,8 +5,7 @@ This is a simple To-Do app API built using Flask, Flask-Swagger-UI (Flasgger), a
 ## Features
 
 - **Create a To-Do Item**
-- **Read all To-Do Items**
-- **Read a specific To-Do Item by ID**
+- **Read all To-Do Items** 
 - **Update a To-Do Item**
 - **Delete a To-Do Item**
 - **Delete all To-Do Items**
@@ -24,15 +23,15 @@ This is a simple To-Do app API built using Flask, Flask-Swagger-UI (Flasgger), a
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/todo-app-api.git
-    cd todo-app-api
+    git clone https://github.com/Amyboid/SkoolWhiz_Backend.git
+    cd SkoolWhiz_Backend
     ```
 
 2. Set up a virtual environment (recommended):
 
     ```bash
     python3 -m venv venv
-    source venv/bin/activate   # On Windows, use 'venv\Scripts\activate'
+    '.\.venv\Scripts\activate'   # On mac or linux, use source venv/bin/activate
     ```
 
 3. Install the required dependencies:
