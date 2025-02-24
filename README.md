@@ -9,6 +9,7 @@ This is a simple To-Do app API built using Flask, Flask-Swagger-UI (Flasgger), a
 - **Read a specific To-Do Item by ID**
 - **Update a To-Do Item**
 - **Delete a To-Do Item**
+- **Delete all To-Do Items**
 - **Swagger Documentation** for interactive API testing
 
 ## Requirements
@@ -50,65 +51,104 @@ This is a simple To-Do app API built using Flask, Flask-Swagger-UI (Flasgger), a
 
 The following endpoints are available:
 
-### 1. **Create a To-Do Item**
-- **URL:** `/todo`
-- **Method:** `POST`
-- **Description:** Creates a new To-Do item.
-- **Request Body:**
-
-    ```json
-    {
-      "task": "Finish homework",
-      "done": false
-    }
-    ```
-
-- **Response:**
-    - `201 Created` on success with the created To-Do item.
-    - `400 Bad Request` if request data is invalid.
-
-### 2. **Get All To-Do Items**
-- **URL:** `/todos`
+### 1. **Get All To-Do Items**
+- **URL:** `/`
 - **Method:** `GET`
 - **Description:** Retrieves a list of all To-Do items.
 - **Response:**
     - `200 OK` with a list of To-Do items.
+    - **Example Response:**
 
-### 3. **Get a To-Do Item by ID**
-- **URL:** `/todo/<id>`
-- **Method:** `GET`
-- **Description:** Retrieves a single To-Do item by its ID.
-- **Response:**
-    - `200 OK` with the To-Do item.
-    - `404 Not Found` if the item doesn't exist.
+    ```json
+    [
+        {"id": 1, "title": "Task 1", "description": "First task", "completed": false},
+        {"id": 2, "title": "Task 2", "description": "Second task", "completed": true}
+    ]
+    ```
 
-### 4. **Update a To-Do Item**
-- **URL:** `/todo/<id>`
-- **Method:** `PUT`
-- **Description:** Updates an existing To-Do item.
+### 2. **Create a To-Do Item**
+- **URL:** `/add`
+- **Method:** `POST`
+- **Description:** Adds a new To-Do item.
 - **Request Body:**
 
     ```json
     {
-      "task": "Finish homework",
-      "done": true
+      "title": "Task 1",
+      "description": "First task"
     }
     ```
 
 - **Response:**
-    - `200 OK` if the item is updated successfully.
-    - `404 Not Found` if the item doesn't exist.
-    - `400 Bad Request` if the request data is invalid.
+    - `201 Created` if the task is successfully created.
+    - `400 Bad Request` if `title` or `description` is missing.
+    - **Example Response:**
 
-### 5. **Delete a To-Do Item**
-- **URL:** `/todo/<id>`
+    ```json
+    {"created": "true"}
+    ```
+
+### 3. **Delete All To-Do Items**
+- **URL:** `/delete`
 - **Method:** `DELETE`
-- **Description:** Deletes a To-Do item by its ID.
+- **Description:** Deletes all To-Do items.
 - **Response:**
-    - `200 OK` if the item is deleted.
-    - `404 Not Found` if the item doesn't exist.
+    - `200 OK` if all tasks are successfully deleted.
+    - **Example Response:**
 
-## Swagger Documentation
+    ```json
+    {"message": "deleted all tasks"}
+    ```
 
+### 4. **Delete a Specific To-Do Item**
+- **URL:** `/delete/<task_id>`
+- **Method:** `DELETE`
+- **Description:** Deletes a specific To-Do item by its ID.
+- **Response:**
+    - `200 OK` if the task is successfully deleted.
+    - `404 Not Found` if the task doesn't exist.
+    - **Example Response for Success:**
+
+    ```json
+    {"deleted": "true", "task_id": 1}
+    ```
+
+    - **Example Response for Not Found:**
+
+    ```json
+    {"error": "task not found"}
+    ```
+
+### 5. **Update a To-Do Item**
+- **URL:** `/update/<task_id>`
+- **Method:** `PATCH`
+- **Description:** Updates a specific To-Do item by its ID.
+- **Request Body:**
+
+    ```json
+    {
+      "title": "Updated Task Title",
+      "description": "Updated task description",
+      "completed": true
+    }
+    ```
+
+- **Response:**
+    - `200 OK` if the task is successfully updated.
+    - `400 Bad Request` if no fields to update are provided or `task_id` is included in the body.
+    - `404 Not Found` if the task doesn't exist.
+    - **Example Response for Success:**
+
+    ```json
+    {"updated": "true", "task_id": 1}
+    ```
+
+    - **Example Response for Not Found:**
+
+    ```json
+    {"error": "task not found"}
+    ```
+
+### 6. **Swagger Documentation**
 The API is integrated with Swagger for interactive documentation and testing. You can access the Swagger UI by navigating to:
 
