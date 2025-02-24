@@ -103,17 +103,19 @@ This will display the **Swagger UI**, where you can:
 - **See real-time responses** with status codes, response data, and more 🖥️
 
 
-## Project Structure
+## Project Structure 📂
 
 The project is organized as follows:
 
-📂 **root/**  
-├── 📂 **src/**  
-|   ├── 📂 **routes/**  
-|   |   ├── `routes.py`    # API routes & CRUD controllers  
-|   ├── `database.py`      # DB initialization & connection  
-├── 📂 **utils/**  
-|   ├── `db_schema.py`    # Database schema  
-├── `app.py`               # Main application entry point  
-├── `requirements.txt`     # Dependencies list  
-└── `README.md`            # Project documentation
+```
+📂 root/
+├── 📂 src/
+|   ├──📂 routes/
+│   |   ├── routes.py    # API routes & CRUD controllers
+│   ├── database.py      # DB initialization & connection
+├── 📂 utils/
+│   ├── db_schema.py    # Database schema 
+├── app.py               # Main application entry point
+├── requirements.txt     # Dependencies list
+└── README.md            # Project documentation
+```
